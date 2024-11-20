@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     password:{
-        typr: String,
+        type: String,
         required: true
     },
     profileImg: {
@@ -21,5 +21,5 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-const User = mongoosemodel("User", userSchema);
+const User = mongoose.model("User", userSchema);
 export default User;
