@@ -9,14 +9,19 @@ export const login = async (req,res) => {
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
         if (!user || !isPasswordCorrect) {
-            res.status(400).json({ error: "Invalid username or password" });
+            return res.status(400).json({ error: "Invalid username or password" });
         }
 
         generateTokenAndSetCookie(user._id, res);
 
         res.status(200).json({
             _id: user._id,
-            username: user.username
+            username: user.username,
+            email: user.email,
+			followers: user.followers,
+			following: user.following,
+			profileImg: user.profileImg,
+			coverImg: user.coverImg,
         })
     } catch (error) {
         console.log("error in login controller", error.message);
@@ -72,7 +77,11 @@ export const signup = async (req, res) => {
             res.status(201).json({
                 _id: newUser._id,
                 username: newUser.username,
-                email: newUser.email
+                email: newUser.email,
+                followers: newUser.followers,
+                following: newUser.following,
+                profileImg: newUser.profileImg,
+                coverImg: newUser.coverImg,
             });
         } else {
             res.status(400).json({ error: "Invalid user data" });
