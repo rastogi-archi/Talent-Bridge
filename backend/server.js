@@ -1,5 +1,6 @@
 import authRoutes from "./routes/Auth.route.js"
 import postRoutes from "./routes/Post.route.js"
+import notificationRoutes from "./routes/Notification.route.js"
 
 import connectDb from "./db/connect.js";
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/post",postRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.listen(PORT, () => {
     console.log("port is running at http://localhost:"+PORT);
