@@ -31,11 +31,11 @@ const SignupPage = () => {
     <div className='h-screen flex justify-center gap-16 flex-col md:flex-row'>
       {/* left */}
       <div className='flex justify-center items-center'>
-        <img src="\public\login.jpeg" alt="login" className='h-96' />
+        <img src="\loginSignup.png" alt="login" className='h-96' />
       </div>
       {/* right */}
       <div className='flex justify-center items-center flex-col'>
-        <h2 className='text-[#d668cd] md:text-5xl text-4xl font-medium mb-4'>Create Account</h2>
+        <h2 className='text-[#1988ab] md:text-5xl text-4xl font-medium mb-4'>Create Account</h2>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* username input */}
@@ -110,7 +110,7 @@ const SignupPage = () => {
         <div className="text-center mt-2">
           <p className="text-sm text-[#3a5963]">
             Already have an account?{" "}
-            <Link to="/login" className="link text-[#d668cd]">
+            <Link to="/login" className="link text-[#1988ab]">
               Login
             </Link>
           </p>

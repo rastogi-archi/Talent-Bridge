@@ -19,12 +19,12 @@ const LoginPage = () => {
     <div className='h-screen flex justify-center gap-16 flex-col md:flex-row'>
       {/* left */}
       <div className='flex justify-center items-center'>
-        <img src="\public\login.jpeg" alt="login" className='h-96' />
+        <img src="\loginSignup.png" alt="login" className='h-96' />
       </div>
       {/* right */}
       <div className='flex justify-center items-center flex-col'>
-        <h2 className='text-[#d668cd] md:text-5xl text-4xl font-medium'>Welcome!</h2>
-        <p className='text-[#cc84c6] md:text-xl text-base mb-4'>Sign in to your account</p>
+        <h2 className='text-[#1988ab] md:text-5xl text-4xl font-medium'>Welcome!</h2>
+        <p className='text-[#1988ab] md:text-xl text-base mb-4'>Sign in to your account</p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* username Input */}
@@ -84,7 +84,7 @@ const LoginPage = () => {
         <div className="text-center mt-2">
           <p className="text-sm text-[#3a5963]">
             Don&apos;t have an account?{" "}
-            <Link to="/signup" className="link text-[#d668cd]">
+            <Link to="/signup" className="link text-[#1988ab]">
               Create account
             </Link>
           </p>

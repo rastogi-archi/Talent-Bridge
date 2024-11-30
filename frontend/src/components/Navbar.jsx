@@ -1,54 +1,80 @@
-import { LogOut, MessageSquare, Settings, User } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setOpenMenu((prev) => !prev);
+  };
+
   return (
-    <header
-      className="bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 
-    backdrop-blur-lg bg-base-100/80"
-    >
-      <div className="container mx-auto px-4 h-16">
-        <div className="flex items-center justify-between h-full">
-          <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-primary" />
-              </div>
-              <h1 className="text-lg font-bold">Chatty</h1>
-            </Link>
-          </div>
+    <header className="flex flex-col bg-white shadow-md">
+      {/* Navbar Section */}
+      <div className="flex justify-between items-center px-4 py-3">
+        {/* Logo */}
+        <div>
+          <img src="/logo.png" alt="Logo" className="h-16" />
+        </div>
 
-          <div className="flex items-center gap-2">
-            <Link
-              to={"/settings"}
-              className={`
-              btn btn-sm gap-2 transition-colors
-              
-              `}
-            >
-              <Settings className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
-            </Link>
+        {/* Desktop Links */}
+        <ul className="hidden sm:flex space-x-6 text-[#1f7894]">
+          <Link to="/">Home</Link>
+          <Link to="connections">Connections</Link>
+          <Link to="/message">Messaging</Link>
+          <Link to="/query">Post Your Query</Link>
+          <Link to="/notifications">Notifications</Link>
+        </ul>
 
-            {/* {authUser && ( */}
-              <>
-                <Link to={"/profile"} className={`btn btn-sm gap-2`}>
-                  <User className="size-5" />
-                  <span className="hidden sm:inline">Profile</span>
-                </Link>
+        {/* Desktop Buttons */}
+        <div className="hidden sm:flex space-x-4">
+          <button className="bg-[#1f7894] text-white px-4 py-2 rounded-full hover:bg-[#1988ab]">Sign up</button>
+          <button className="border px-4 py-2 rounded-full border-[#1988ab] hover:bg-[#1f7894] hover:text-white">
+            Login
+          </button>
+        </div>
 
-                <button className="flex gap-2 items-center">
-                  <LogOut className="size-5" />
-                  <span className="hidden sm:inline">Logout</span>
-                </button>
-              </>
-            {/* )} */}
-          </div>
+        {/* Mobile Menu Icon */}
+        <div className="sm:hidden cursor-pointer" onClick={toggleMenu}>
+          {openMenu ? <X className="size-6 text-[#1f7894]" /> : <Menu className="size-6 text-[#1f7894]" />}
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`overflow-hidden bg-white sm:hidden transition-max-height duration-300 ${openMenu ? 'max-h-[300px]' : 'max-h-0'
+          }`}
+      >
+        <ul className="flex flex-col space-y-4 p-4 text-[#1f7894]">
+          <Link onClick={toggleMenu}>
+            Home
+          </Link>
+          <Link onClick={toggleMenu}>
+            Connections
+          </Link>
+          <Link onClick={toggleMenu}>
+            Messaging
+          </Link>
+          <Link onClick={toggleMenu}>
+            Post Your Query
+          </Link>
+          <Link onClick={toggleMenu}>
+            Notifications
+          </Link>
+        </ul>
+        <div className="flex flex-col space-y-4 p-4">
+          <button className="bg-[#1f7894] text-white py-2 rounded-full hover:bg-[#1988ab]">Signup</button>
+          <button className="border py-2 rounded-full border-[#1988ab] hover:bg-[#1f7894] hover:text-white">
+            Login
+          </button>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
+
+
+

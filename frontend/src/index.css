@@ -10,3 +10,8 @@
     margin: 0;
     padding: 0;
 }
+
+.message{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
