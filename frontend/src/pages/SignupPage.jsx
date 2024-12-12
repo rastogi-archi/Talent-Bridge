@@ -1,12 +1,11 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { EyeOff, Eye, Lock, Mail, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from "react-hot-toast";
+import axios from 'axios';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -14,7 +13,7 @@ const SignupPage = () => {
   });
 
   const validateForm = () => {
-    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.username.trim()) return toast.error("Username is required");
     if (!formData.email.trim()) return toast.error("Email is required");
     if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required");
@@ -26,19 +25,29 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = validateForm();
+    if (success) {
+      axios.post("http://localhost:5000/api/auth/signup", formData)
+      .then((res) => {
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err.response)
+      })
+    }
   };
-  return (
-    <div className='h-screen flex justify-center gap-16 flex-col md:flex-row'>
-      {/* left */}
-      <div className='flex justify-center items-center'>
-        <img src="\loginSignup.png" alt="login" className='h-96' />
-      </div>
-      {/* right */}
-      <div className='flex justify-center items-center flex-col'>
-        <h2 className='text-[#1988ab] md:text-5xl text-4xl font-medium mb-4'>Create Account</h2>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          {/* username input */}
+  return (
+    <div className="h-screen flex flex-col md:flex-row justify-center md:space-x-10 px-4 items-center mb-20 sm:mb-0">
+      {/* Left */}
+      <div className="flex justify-center items-center">
+        <img src="\loginSignup.png" alt="login" className="sm:h-[450px] w-full sm:w-auto" />
+      </div>
+      
+      {/* Right */}
+      <div className="flex justify-center items-center flex-col w-full sm:w-auto">
+        <h2 className="text-[#1988ab] text-4xl sm:text-5xl font-medium mb-4">Create Account</h2>
+
+        <form className="space-y-4 w-full max-w-sm" onSubmit={handleSubmit}>
+          {/* Username Input */}
           <div className="form-control">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
@@ -53,6 +62,7 @@ const SignupPage = () => {
               />
             </div>
           </div>
+
           {/* Email Input */}
           <div className="form-control">
             <div className="relative">
@@ -95,29 +105,26 @@ const SignupPage = () => {
               </button>
             </div>
           </div>
-          {/* <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
-            {isSigningUp ? (
-              <>
-                <Loader2 className="size-5 animate-spin" />
-                Loading...
-              </>
-            ) : (
-              "Create Account"
-            )}
-          </button> */}
+
+          <button
+            type="submit"
+            className="w-full py-2 rounded-full bg-[#1988ab] text-white hover:bg-[#1f7894] focus:outline-none"
+          >
+            Create Account
+          </button>
         </form>
 
-        <div className="text-center mt-2">
+        <div className="text-center mt-4">
           <p className="text-sm text-[#3a5963]">
             Already have an account?{" "}
-            <Link to="/login" className="link text-[#1988ab]">
+            <Link to="/login" className="text-[#1988ab]">
               Login
             </Link>
           </p>
         </div>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default SignupPage
+export default SignupPage;

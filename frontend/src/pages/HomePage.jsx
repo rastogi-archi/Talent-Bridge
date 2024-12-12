@@ -68,7 +68,7 @@ const HomePage = () => {
             </h2>
           </div>
           <p className='text-sm sm:text-lg text-center text-[#1988ab] mb-4'>See How Our Platform Helped Clients Achieve Their Goals</p>
-          <Testimonials />
+          <Testimonials/>
         </div>
       </div>
     </>

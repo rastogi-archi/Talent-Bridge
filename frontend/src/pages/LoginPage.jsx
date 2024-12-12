@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { EyeOff, Eye, Lock, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginPage = () => {
 
@@ -14,12 +15,20 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+    axios.post("http://localhost:5000/api/auth/login", formData)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
   };
   return (
-    <div className='h-screen flex justify-center gap-16 flex-col md:flex-row'>
+    <div className='h-screen flex justify-center items-center md:gap-10 flex-col md:flex-row mb-20 sm:mb-0'>
       {/* left */}
       <div className='flex justify-center items-center'>
-        <img src="\loginSignup.png" alt="login" className='h-96' />
+        <img src="\loginSignup.png" alt="login" className="sm:h-[450px] w-full sm:w-auto" />
       </div>
       {/* right */}
       <div className='flex justify-center items-center flex-col'>
@@ -79,6 +88,7 @@ const LoginPage = () => {
               "Sign in"
             )}
           </button> */}
+          <button type="submit">Login</button>
         </form>
 
         <div className="text-center mt-2">
@@ -89,11 +99,11 @@ const LoginPage = () => {
             </Link>
           </p>
         </div>
-        <p className='uppercase text-xs mt-5 text-[#3a5963]'>or login with</p>
+        <p className='uppercase text-xs mt-5 text-[#3a5963] ml-3'>or login with</p>
         <div className='flex mt-2'>
-          <img src="\public\fb.png" alt="" className='h-9' />
-          <img src="\public\google.png" alt="" className='h-9' />
-          <img src="\public\linkedin.webp" alt="" className='h-9 ml-3' />
+          <img src="\fb.png" alt="" className='h-9' />
+          <img src="\google.png" alt="" className='h-9' />
+          <img src="\linkedin.webp" alt="" className='h-9 ml-3' />
         </div>
       </div>
     </div >
